@@ -1,12 +1,10 @@
 def calculadora_impuestos_progresivos():
-   
     tramos = [
         (20000, 0.00),   
         (50000, 0.10),   
         (100000, 0.20),  
         (float('inf'), 0.30) 
     ]
-
     while True:
         try:
             ingreso_mensual = float(input("Ingrese el ingreso mensual: $"))
@@ -18,7 +16,6 @@ def calculadora_impuestos_progresivos():
             print("Entrada no válida. Por favor, ingrese un número.")
 
     ingreso_anual = ingreso_mensual * 14
-    
     ingreso_restante = ingreso_anual
     total_impuestos = 0
     limite_inferior = 0
@@ -30,11 +27,8 @@ def calculadora_impuestos_progresivos():
     for limite_superior, tasa in tramos:
         
         if ingreso_restante > 0:
-            
             monto_del_tramo = limite_superior - limite_inferior
-            
             base_gravable = min(ingreso_restante, monto_del_tramo)
-            
             impuesto_tramo = base_gravable * tasa
             total_impuestos += impuesto_tramo
 
@@ -45,13 +39,10 @@ def calculadora_impuestos_progresivos():
 
             ingreso_restante -= base_gravable
             limite_inferior = limite_superior
-        
         if ingreso_restante <= 0:
             break
-
     print("\n" + "=" * 40)
     print(f"Total de Impuestos Anuales: ${total_impuestos:,.2f}")
-    
     if ingreso_anual > 0:
         tasa_efectiva = (total_impuestos / ingreso_anual) * 100
         print(f"Tasa Efectiva Real (Impuesto/Ingreso): {tasa_efectiva:.2f}%")
